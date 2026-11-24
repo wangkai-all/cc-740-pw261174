@@ -1,0 +1,7 @@
+# 本项目仅使用 Python 3.11 标准库，无任何第三方运行时依赖。
+# 直接用系统 Python 即可启动，无需 pip install：
+#   python3 -m app.server --data-dir data --port 8000
+#
+# 测试、模拟与实验同样只用标准库（unittest / http.server / json / math / random）。
+# 如环境要求必须存在本文件，可在已验证的解释器上执行：
+#   pip freeze > requirements.lock   # 预期为空（或仅含 pip/setuptools 等基础包）

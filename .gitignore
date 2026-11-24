@@ -5,6 +5,8 @@
 node_modules/
 .venv/
 __pycache__/
+# runtime application data (event logs + audit stream)
+/data/
 .claude/
 .cc-workbench/
 .next/

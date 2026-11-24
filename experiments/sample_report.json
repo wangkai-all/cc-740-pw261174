@@ -1,0 +1,488 @@
+{
+  "base_seed": 20261124,
+  "replications": 100,
+  "round_size": 8,
+  "cap": 1200,
+  "true_ps": [
+    0.0,
+    0.02,
+    0.03,
+    0.06,
+    0.1,
+    0.15,
+    0.25
+  ],
+  "note": "paired seeds: every preset inspects the same fictional lot",
+  "results": [
+    {
+      "plan": {
+        "method": "sprt_binomial",
+        "sampling": "with_replacement",
+        "p0": 0.02,
+        "p1": 0.08,
+        "alpha": 0.02,
+        "beta": 0.05,
+        "alpha_cs": null,
+        "N": null,
+        "name": "strict"
+      },
+      "false_reject_at_p0": 0.01,
+      "false_accept_at_p1": null,
+      "cells": [
+        {
+          "true_p": 0.0,
+          "accept_rate": 1.0,
+          "reject_rate": 0.0,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 48.0,
+          "n_range": [
+            48,
+            48
+          ]
+        },
+        {
+          "true_p": 0.02,
+          "accept_rate": 0.99,
+          "reject_rate": 0.01,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 81.94,
+          "n_range": [
+            48,
+            277
+          ]
+        },
+        {
+          "true_p": 0.03,
+          "accept_rate": 0.88,
+          "reject_rate": 0.12,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 108.54,
+          "n_range": [
+            11,
+            438
+          ]
+        },
+        {
+          "true_p": 0.06,
+          "accept_rate": 0.15,
+          "reject_rate": 0.85,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 110.91,
+          "n_range": [
+            7,
+            508
+          ]
+        },
+        {
+          "true_p": 0.1,
+          "accept_rate": 0.03,
+          "reject_rate": 0.97,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 60.69,
+          "n_range": [
+            6,
+            185
+          ]
+        },
+        {
+          "true_p": 0.15,
+          "accept_rate": 0.01,
+          "reject_rate": 0.99,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 30.5,
+          "n_range": [
+            3,
+            99
+          ]
+        },
+        {
+          "true_p": 0.25,
+          "accept_rate": 0.0,
+          "reject_rate": 1.0,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 15.71,
+          "n_range": [
+            3,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "plan": {
+        "method": "sprt_binomial",
+        "sampling": "with_replacement",
+        "p0": 0.03,
+        "p1": 0.1,
+        "alpha": 0.05,
+        "beta": 0.1,
+        "alpha_cs": null,
+        "N": null,
+        "name": "standard"
+      },
+      "false_reject_at_p0": 0.06,
+      "false_accept_at_p1": 0.16,
+      "cells": [
+        {
+          "true_p": 0.0,
+          "accept_rate": 1.0,
+          "reject_rate": 0.0,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 31.0,
+          "n_range": [
+            31,
+            31
+          ]
+        },
+        {
+          "true_p": 0.02,
+          "accept_rate": 1.0,
+          "reject_rate": 0.0,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 43.41,
+          "n_range": [
+            31,
+            133
+          ]
+        },
+        {
+          "true_p": 0.03,
+          "accept_rate": 0.94,
+          "reject_rate": 0.06,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 54.67,
+          "n_range": [
+            10,
+            235
+          ]
+        },
+        {
+          "true_p": 0.06,
+          "accept_rate": 0.5,
+          "reject_rate": 0.5,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 83.84,
+          "n_range": [
+            7,
+            287
+          ]
+        },
+        {
+          "true_p": 0.1,
+          "accept_rate": 0.16,
+          "reject_rate": 0.84,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 62.9,
+          "n_range": [
+            6,
+            301
+          ]
+        },
+        {
+          "true_p": 0.15,
+          "accept_rate": 0.01,
+          "reject_rate": 0.99,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 30.27,
+          "n_range": [
+            3,
+            126
+          ]
+        },
+        {
+          "true_p": 0.25,
+          "accept_rate": 0.0,
+          "reject_rate": 1.0,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 13.93,
+          "n_range": [
+            3,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "plan": {
+        "method": "sprt_binomial",
+        "sampling": "with_replacement",
+        "p0": 0.05,
+        "p1": 0.15,
+        "alpha": 0.1,
+        "beta": 0.2,
+        "alpha_cs": null,
+        "N": null,
+        "name": "relaxed"
+      },
+      "false_reject_at_p0": null,
+      "false_accept_at_p1": 0.21,
+      "cells": [
+        {
+          "true_p": 0.0,
+          "accept_rate": 1.0,
+          "reject_rate": 0.0,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 14.0,
+          "n_range": [
+            14,
+            14
+          ]
+        },
+        {
+          "true_p": 0.02,
+          "accept_rate": 1.0,
+          "reject_rate": 0.0,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 16.97,
+          "n_range": [
+            14,
+            47
+          ]
+        },
+        {
+          "true_p": 0.03,
+          "accept_rate": 0.99,
+          "reject_rate": 0.01,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 19.45,
+          "n_range": [
+            10,
+            68
+          ]
+        },
+        {
+          "true_p": 0.06,
+          "accept_rate": 0.88,
+          "reject_rate": 0.12,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 31.08,
+          "n_range": [
+            7,
+            166
+          ]
+        },
+        {
+          "true_p": 0.1,
+          "accept_rate": 0.64,
+          "reject_rate": 0.36,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 32.32,
+          "n_range": [
+            2,
+            90
+          ]
+        },
+        {
+          "true_p": 0.15,
+          "accept_rate": 0.21,
+          "reject_rate": 0.79,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 21.31,
+          "n_range": [
+            2,
+            56
+          ]
+        },
+        {
+          "true_p": 0.25,
+          "accept_rate": 0.02,
+          "reject_rate": 0.98,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 12.59,
+          "n_range": [
+            2,
+            38
+          ]
+        }
+      ]
+    },
+    {
+      "plan": {
+        "method": "sprt_hypergeometric",
+        "sampling": "without_replacement",
+        "p0": 0.03,
+        "p1": 0.1,
+        "alpha": 0.05,
+        "beta": 0.1,
+        "alpha_cs": null,
+        "N": 500,
+        "name": "finite-lot-standard"
+      },
+      "false_reject_at_p0": 0.03,
+      "false_accept_at_p1": 0.11,
+      "cells": [
+        {
+          "true_p": 0.0,
+          "accept_rate": 1.0,
+          "reject_rate": 0.0,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 30.0,
+          "n_range": [
+            30,
+            30
+          ]
+        },
+        {
+          "true_p": 0.02,
+          "accept_rate": 1.0,
+          "reject_rate": 0.0,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 41.27,
+          "n_range": [
+            30,
+            110
+          ]
+        },
+        {
+          "true_p": 0.03,
+          "accept_rate": 0.97,
+          "reject_rate": 0.03,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 53.47,
+          "n_range": [
+            30,
+            142
+          ]
+        },
+        {
+          "true_p": 0.06,
+          "accept_rate": 0.48,
+          "reject_rate": 0.52,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 68.78,
+          "n_range": [
+            9,
+            210
+          ]
+        },
+        {
+          "true_p": 0.1,
+          "accept_rate": 0.11,
+          "reject_rate": 0.89,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 44.85,
+          "n_range": [
+            3,
+            137
+          ]
+        },
+        {
+          "true_p": 0.15,
+          "accept_rate": 0.01,
+          "reject_rate": 0.99,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 27.02,
+          "n_range": [
+            6,
+            100
+          ]
+        },
+        {
+          "true_p": 0.25,
+          "accept_rate": 0.0,
+          "reject_rate": 1.0,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 12.91,
+          "n_range": [
+            3,
+            41
+          ]
+        }
+      ]
+    },
+    {
+      "plan": {
+        "method": "cs_beta_mixture",
+        "sampling": "with_replacement",
+        "p0": 0.03,
+        "p1": 0.1,
+        "alpha": null,
+        "beta": null,
+        "alpha_cs": 0.05,
+        "N": null,
+        "name": "confidence-sequence"
+      },
+      "false_reject_at_p0": 0.0,
+      "false_accept_at_p1": 0.0,
+      "cells": [
+        {
+          "true_p": 0.0,
+          "accept_rate": 1.0,
+          "reject_rate": 0.0,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 284.0,
+          "n_range": [
+            284,
+            284
+          ]
+        },
+        {
+          "true_p": 0.02,
+          "accept_rate": 0.11,
+          "reject_rate": 0.0,
+          "censor_rate": 0.89,
+          "avg_inspection_count": 1151.43,
+          "n_range": [
+            284,
+            1200
+          ]
+        },
+        {
+          "true_p": 0.03,
+          "accept_rate": 0.0,
+          "reject_rate": 0.0,
+          "censor_rate": 1.0,
+          "avg_inspection_count": 1200.0,
+          "n_range": [
+            1200,
+            1200
+          ]
+        },
+        {
+          "true_p": 0.06,
+          "accept_rate": 0.0,
+          "reject_rate": 0.0,
+          "censor_rate": 1.0,
+          "avg_inspection_count": 1200.0,
+          "n_range": [
+            1200,
+            1200
+          ]
+        },
+        {
+          "true_p": 0.1,
+          "accept_rate": 0.0,
+          "reject_rate": 0.01,
+          "censor_rate": 0.99,
+          "avg_inspection_count": 1188.02,
+          "n_range": [
+            2,
+            1200
+          ]
+        },
+        {
+          "true_p": 0.15,
+          "accept_rate": 0.0,
+          "reject_rate": 0.98,
+          "censor_rate": 0.02,
+          "avg_inspection_count": 399.12,
+          "n_range": [
+            2,
+            1200
+          ]
+        },
+        {
+          "true_p": 0.25,
+          "accept_rate": 0.0,
+          "reject_rate": 1.0,
+          "censor_rate": 0.0,
+          "avg_inspection_count": 46.78,
+          "n_range": [
+            2,
+            178
+          ]
+        }
+      ]
+    }
+  ]
+}

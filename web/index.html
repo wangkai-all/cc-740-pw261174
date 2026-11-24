@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>序贯抽检 · Sequential Acceptance Sampling</title>
+<link rel="stylesheet" href="/web/app.css">
+</head>
+<body>
+<header>
+  <h1>序贯抽检应用</h1>
+  <nav>
+    <button data-tab="batches" class="active">批次与逐轮收样</button>
+    <button data-tab="plans">风险配置</button>
+    <button data-tab="experiment">可复现实验</button>
+    <button data-tab="handcheck">手算核对</button>
+    <button data-tab="audit">审计流</button>
+  </nav>
+</header>
+
+<main>
+  <!-- ============ 批次 ============ -->
+  <section id="tab-batches" class="tab active">
+    <div class="grid two">
+      <div class="card">
+        <h2>新建批次</h2>
+        <form id="create-batch-form">
+          <label>风险配置
+            <select name="preset" id="preset-select"></select>
+          </label>
+          <label>批次备注（货物）
+            <input name="lot_note" placeholder="例如：虚构电子元件批次 L-001">
+          </label>
+          <button type="submit">创建批次</button>
+        </form>
+        <h3>已有批次</h3>
+        <table id="batch-list"><thead><tr>
+          <th>批次号</th><th>方法</th><th>状态</th><th>n/k</th><th>轮次</th><th>放行</th>
+        </tr></thead><tbody></tbody></table>
+      </div>
+
+      <div class="card" id="batch-detail-card" hidden>
+        <h2>批次 <span id="batch-id"></span></h2>
+        <p id="batch-assumptions" class="muted"></p>
+        <div id="decision-banner"></div>
+        <dl class="stats" id="batch-stats"></dl>
+
+        <h3>本轮收样</h3>
+        <form id="intake-form">
+          <textarea name="entries" rows="4"
+            placeholder='每行一件：件号,合格/不合格&#10;例如：&#10;SN-001,合格&#10;SN-002,不合格'></textarea>
+          <div class="row">
+            <button type="submit">记录本批</button>
+            <button type="button" id="open-round-btn">开启下一轮抽样</button>
+          </div>
+        </form>
+        <p id="intake-feedback" class="feedback"></p>
+
+        <h3>边界与下一轮抽样</h3>
+        <pre id="boundary-view" class="code"></pre>
+
+        <h3>撤回误归样本 / 放行 / 更正</h3>
+        <form id="withdraw-form" class="row">
+          <input name="item_id" placeholder="件号" required>
+          <input name="reason" placeholder="撤回原因（必填）" required>
+          <button type="submit">撤回该件贡献</button>
+        </form>
+        <div class="row">
+          <button id="release-btn">放行（冻结并记录时间）</button>
+        </div>
+        <form id="correction-form" class="row">
+          <input name="note" placeholder="放行后更正说明">
+          <button type="submit">标记后续更正</button>
+        </form>
+        <button id="verify-btn">重放一致性校验</button>
+        <pre id="verify-view" class="code"></pre>
+      </div>
+    </div>
+
+    <div class="card" id="history-card" hidden>
+      <h3>逐件统计量轨迹（重放派生）</h3>
+      <table id="history-table"><thead><tr>
+        <th>序号</th><th>件号</th><th>结果</th><th>n</th><th>k</th>
+        <th>统计量 / 区间</th><th>判定</th>
+      </tr></thead><tbody></tbody></table>
+      <h3>撤回与更正记录</h3>
+      <table id="withdrawn-table"><thead><tr>
+        <th>时间</th><th>件号</th><th>原因</th><th>模式</th>
+      </tr></thead><tbody></tbody></table>
+    </div>
+  </section>
+
+  <!-- ============ 配置 ============ -->
+  <section id="tab-plans" class="tab">
+    <div class="card">
+      <h2>事先固定的风险配置</h2>
+      <p class="muted">配置在批次创建时快照保存；之后修改不会影响历史批次的判定。</p>
+      <table id="preset-table"><thead><tr>
+        <th>名称</th><th>方法</th><th>抽样</th><th>p0</th><th>p1</th>
+        <th>α / α_cs</th><th>β</th><th>N</th>
+      </tr></thead><tbody></tbody></table>
+    </div>
+    <div class="card">
+      <h2>自定义方案（参数与假设随批次保存）</h2>
+      <form id="plan-form" class="grid-form">
+        <label>方法
+          <select name="method">
+            <option value="sprt_binomial">二项 SPRT（有放回）</option>
+            <option value="sprt_hypergeometric">超几何 SPRT（无放回有限批）</option>
+            <option value="cs_beta_mixture">Beta 混合置信序列（有放回）</option>
+          </select>
+        </label>
+        <label>名称<input name="name" value="custom"></label>
+        <label>p0<input name="p0" type="number" step="0.001" value="0.03"></label>
+        <label>p1<input name="p1" type="number" step="0.001" value="0.10"></label>
+        <label>α<input name="alpha" type="number" step="0.01" value="0.05"></label>
+        <label>β<input name="beta" type="number" step="0.01" value="0.10"></label>
+        <label>α_cs<input name="alpha_cs" type="number" step="0.01" value="0.05"></label>
+        <label>有限批 N（无放回时必填）<input name="N" type="number" value="500"></label>
+        <button type="submit">校验并保存方案</button>
+      </form>
+      <pre id="plan-assumptions" class="code"></pre>
+    </div>
+  </section>
+
+  <!-- ============ 实验 ============ -->
+  <section id="tab-experiment" class="tab">
+    <div class="card">
+      <h2>虚构货物可复现实验</h2>
+      <form id="experiment-form" class="grid-form">
+        <label>固定种子 <input name="base_seed" type="number" value="20261124"></label>
+        <label>每点重复次数 <input name="replications" type="number" value="200"></label>
+        <label>真实不合格率（逗号分隔）
+          <input name="true_ps" value="0.0,0.03,0.06,0.10,0.15"></label>
+        <label>每轮件数 <input name="round_size" type="number" value="1"></label>
+        <div id="experiment-plan-picks"></div>
+        <button type="submit">运行实验（同种子配对比较）</button>
+      </form>
+      <div id="experiment-results"></div>
+    </div>
+  </section>
+
+  <!-- ============ 手算 ============ -->
+  <section id="tab-handcheck" class="tab">
+    <div class="card">
+      <h2>手算轨迹核对</h2>
+      <p class="muted">逐步累加的手算 LLR、闭式 LLR 与引擎输出必须逐轮一致。</p>
+      <button id="handcheck-btn">运行手算核对</button>
+      <pre id="handcheck-view" class="code"></pre>
+    </div>
+  </section>
+
+  <!-- ============ 审计 ============ -->
+  <section id="tab-audit" class="tab">
+    <div class="card">
+      <h2>全局审计流（仅追加 JSONL）</h2>
+      <button id="audit-refresh">刷新</button>
+      <pre id="audit-view" class="code audit"></pre>
+    </div>
+  </section>
+</main>
+
+<script src="/web/app.js"></script>
+</body>
+</html>

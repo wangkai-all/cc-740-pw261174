@@ -1,0 +1,1 @@
+"""Sequential acceptance-sampling application."""
